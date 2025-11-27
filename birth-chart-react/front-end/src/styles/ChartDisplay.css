@@ -3,9 +3,9 @@
 }
 
 .chart-display h2 {
-  color: #667eea;
+  color: #ffff;
   margin-top: 0;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #ffff;
   padding-bottom: 10px;
   text-align: center;
 }
@@ -55,7 +55,7 @@
 }
 
 .planet-card:hover {
-  border-color: #667eea;
+  border-color: #c2ea66;
   box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2);
   transform: translateY(-2px);
 }

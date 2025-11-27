@@ -1,7 +1,7 @@
 .birth-form h2 {
-  color: #667eea;
+  color: #ffffff;
   margin-top: 0;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #ffffff;
   padding-bottom: 10px;
 }
 
@@ -29,7 +29,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #c2ea66;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -40,7 +40,7 @@
   margin-bottom: 20px;
   font-size: 0.9rem;
   color: #666;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #c2ea66;
 }
 
 .coordinates p {
@@ -50,7 +50,7 @@
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #cd66ea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c2ea66 0%, #4ba0a2 100%);
   color: white;
   border: none;
   border-radius: 6px;

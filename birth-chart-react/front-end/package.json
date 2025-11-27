@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "astronomy-engine": "^2.1.19",
     "axios": "^1.12.2",
+    "ogl": "^1.0.11",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scripts": "5.0.1",

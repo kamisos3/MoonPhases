@@ -202,7 +202,7 @@ function App() {
     <div className="App">
       <Galaxy 
         className="galaxy-background"
-        hueShift={280}
+        hueShift={360}
         density={1.2}
         glowIntensity={0.8}
         rotationSpeed={0.05}
@@ -215,8 +215,8 @@ function App() {
 
       />
       <header className="App-header">
-        <h1>Birth Chart Calculator</h1>
-        <p>Discover your astrological profile</p>
+        <h1>Astral Map</h1>
+        <p>Discover your birth chart</p>
       </header>
       
       <main className="container">
@@ -347,7 +347,8 @@ vec3 StarLayer(vec2 uv) {
       twinkle = mix(1.0, twinkle, uTwinkleIntensity);
       star *= twinkle;
       
-      col += star * size * color;
+      float edgeFade = smoothstep(0.5, 0.4, abs(gv.x)) * smoothstep(0.5, 0.4, abs (gv.y));
+      col += star * size * color * edgeFade; 
     }
   }
 

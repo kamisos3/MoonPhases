@@ -215,7 +215,7 @@ function App() {
 
       />
       <header className="App-header">
-        <h1>Astral Map</h1>
+        <h1>AstroMap</h1>
         <p>Discover your birth chart</p>
       </header>
       

@@ -70,14 +70,14 @@
 }
 
 .planet-header h3 {
-  color: #667eea;
+  color: #4ba0a2;
   margin: 0;
   font-size: 1rem;
 }
 
 .planet-icon {
   font-size: 1.3rem;
-  color: #764ba2;
+  color: #4ba0a2;
   width: 24px;
   height: 24px;
   display: flex;
@@ -94,12 +94,12 @@
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 10px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #c2ea66;
 }
 
 .zodiac-sign {
   font-weight: 700;
-  color: #667eea;
+  color: #4ba0a2;
   font-size: 1rem;
   margin: 0 0 4px 0;
 }
@@ -115,7 +115,7 @@
   padding: 8px;
   border-radius: 6px;
   margin-bottom: 8px;
-  border-left: 4px solid #764ba2;
+  border-left: 4px solid #c2ea66;
   font-size: 0.8rem;
 }
 
@@ -145,7 +145,7 @@
 
 .element.earth {
   background: #DCEED9;
-  color: #7C3AED;
+  color: #8dec7c;
 }
 
 .element.air {
@@ -162,7 +162,7 @@
   background: linear-gradient(135deg, #764ba215 0%, #667eea15 100%);
   padding: 8px;
   border-radius: 6px;
-  border-left: 4px solid #764ba2;
+  border-left: 4px solid #c2ea66;
 }
 
 .meaning {

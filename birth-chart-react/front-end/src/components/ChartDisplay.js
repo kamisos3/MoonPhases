@@ -23,6 +23,22 @@ export default function ChartDisplay({ chartData }) {
     "Pisces": "fas fa-fish"
   };
 
+  // Zodiac glyphs/symbols
+  const ZODIAC_GLYPHS = {
+    "Aries": "♈",
+    "Taurus": "♉",
+    "Gemini": "♊",
+    "Cancer": "♋",
+    "Leo": "♌",
+    "Virgo": "♍",
+    "Libra": "♎",
+    "Scorpio": "♏",
+    "Sagittarius": "♐",
+    "Capricorn": "♑",
+    "Aquarius": "♒",
+    "Pisces": "♓"
+  };
+
   // Planet icons mapping
   const PLANET_ICONS = {
     "Sun": "fas fa-sun",
@@ -76,9 +92,22 @@ export default function ChartDisplay({ chartData }) {
                 stroke="rgba(194, 234, 102, 0.2)"
                 strokeWidth="1"
               />
+              {/* Zodiac glyph/symbol - far outside */}
               <text
-                x={center + (planetsRing3 + 40) * Math.cos(angle)}
-                y={center + (planetsRing3 + 40) * Math.sin(angle)}
+                x={center + (planetsRing3 + 55) * Math.cos(angle)}
+                y={center + (planetsRing3 + 55) * Math.sin(angle)}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize="22"
+                fontWeight="bold"
+                fill="#c2ea66"
+                style={{ pointerEvents: "none" }}
+              >
+                {ZODIAC_GLYPHS[sign]}
+              </text>
+              <text
+                x={center + (planetsRing3 + 24) * Math.cos(angle)}
+                y={center + (planetsRing3 + 24) * Math.sin(angle)}
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fontSize="12"

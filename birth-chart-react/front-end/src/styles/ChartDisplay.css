@@ -1,28 +1,42 @@
 .chart-display {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .chart-display h2 {
-  color: #ffff;
+  color: #ffffff;
   margin-top: 0;
-  border-bottom: 2px solid #ffff;
-  padding-bottom: 10px;
+  border-bottom: 3px solid #c2ea66;
+  padding-bottom: 15px;
   text-align: center;
+  font-size: 1.8rem;
+  width: 100%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .chart-container {
   display: flex;
-  gap: 30px;
-  align-items: flex-start;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .zodiac-wheel {
-  flex: 1;
-  min-width: 300px;
+  flex: 0 1 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(194, 234, 102, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .chart-canvas {
@@ -30,176 +44,169 @@
   width: 100%;
   height: auto;
   border-radius: 50%;
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2);
-  background: white;
+  box-shadow: 0 0 30px rgba(194, 234, 102, 0.3),
+              inset 0 0 20px rgba(194, 234, 102, 0.1);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 3px solid rgba(194, 234, 102, 0.4);
 }
 
 .planets-list {
   flex: 1;
-  min-width: 300px;
+  min-width: 280px;
+  max-width: 450px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(194, 234, 102, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
-  margin-top: 20px;
 }
 
 .planet-card {
-  background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(194, 234, 102, 0.08) 0%, rgba(102, 126, 234, 0.08) 100%);
+  border: 2px solid rgba(194, 234, 102, 0.3);
+  border-radius: 12px;
   padding: 15px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .planet-card:hover {
   border-color: #c2ea66;
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(194, 234, 102, 0.3),
+              inset 0 0 10px rgba(194, 234, 102, 0.1);
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, rgba(194, 234, 102, 0.15) 0%, rgba(102, 126, 234, 0.15) 100%);
 }
 
 .planet-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(194, 234, 102, 0.2);
 }
 
 .planet-header h3 {
-  color: #4ba0a2;
+  color: #c2ea66;
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .planet-icon {
-  font-size: 1.3rem;
-  color: #4ba0a2;
-  width: 24px;
-  height: 24px;
+  font-size: 1.5rem;
+  color: #c2ea66;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .planet-details {
   font-size: 0.85rem;
+  color: #ffffff;
 }
 
 .zodiac-info {
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  background: linear-gradient(135deg, rgba(194, 234, 102, 0.15) 0%, rgba(102, 126, 234, 0.15) 100%);
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 10px;
   border-left: 4px solid #c2ea66;
+  backdrop-filter: blur(5px);
 }
 
 .zodiac-sign {
-  font-weight: 700;
-  color: #4ba0a2;
-  font-size: 1rem;
-  margin: 0 0 4px 0;
+  font-weight: 600;
+  color: #c2ea66;
+  margin: 5px 0;
+  font-size: 0.95rem;
 }
 
 .degree {
-  color: #555;
-  margin: 0;
-  font-size: 0.85rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  margin: 3px 0;
 }
 
 .astrology-box {
-  background: #f9f9f9;
+  background: rgba(194, 234, 102, 0.1);
   padding: 8px;
   border-radius: 6px;
-  margin-bottom: 8px;
-  border-left: 4px solid #c2ea66;
+  margin: 8px 0;
+  border: 1px solid rgba(194, 234, 102, 0.2);
   font-size: 0.8rem;
 }
 
 .property {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 4px 0;
-  color: #555;
+  color: #ffffff;
 }
 
 .property strong {
-  color: #333;
+  color: #c2ea66;
 }
 
 .element {
   padding: 2px 6px;
-  border-radius: 4px;
+  border-radius: 3px;
   font-size: 0.75rem;
   font-weight: 600;
-  display: inline-block;
-}
-
-.element.fire {
-  background: #FFE5B4;
-  color: #D97706;
-}
-
-.element.earth {
-  background: #DCEED9;
-  color: #8dec7c;
-}
-
-.element.air {
-  background: #D4E9FF;
-  color: #0EA5E9;
-}
-
-.element.water {
-  background: #E0F2FE;
-  color: #0284C7;
+  background: rgba(194, 234, 102, 0.2);
+  color: #c2ea66;
 }
 
 .meaning-box {
-  background: linear-gradient(135deg, #764ba215 0%, #667eea15 100%);
-  padding: 8px;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 10px;
   border-radius: 6px;
-  border-left: 4px solid #c2ea66;
+  margin-top: 8px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  font-size: 0.8rem;
 }
 
 .meaning {
+  color: #ffffff;
   margin: 0;
-  color: #555;
+  line-height: 1.4;
   font-style: italic;
-  font-size: 0.8rem;
-  line-height: 1.3;
 }
 
 .longitude {
-  color: #999;
-  margin-top: 6px;
-  text-align: right;
+  text-align: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(194, 234, 102, 0.2);
+  color: #c2ea66;
   font-size: 0.8rem;
+  font-weight: 600;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .chart-container {
     flex-direction: column;
+    gap: 20px;
+  }
+
+  .planets-list {
+    width: 100%;
+    max-width: 100%;
   }
 
   .chart-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .chart-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .zodiac-wheel {
-    min-width: 100%;
-  }
-
-  .planets-list {
-    min-width: 100%;
   }
 }

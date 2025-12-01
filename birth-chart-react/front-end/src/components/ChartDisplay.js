@@ -4,8 +4,12 @@ import "../styles/ChartDisplay.css";
 export default function ChartDisplay({ chartData }) {
   if (!chartData) return null;
 
-  // log all keys in chartData
   console.log("ChartData keys:", Object.keys(chartData));
+  console.log("Full chartData:", chartData);
+
+  // Get houses if available
+  const houses = chartData.houses || [];
+  const chart = chartData.chart || chartData;
 
   // Zodiac signs order and icons
   const ZODIAC_ICONS = {
@@ -23,21 +27,6 @@ export default function ChartDisplay({ chartData }) {
     "Pisces": "fas fa-fish"
   };
 
-  // Zodiac glyphs/symbols
-  const ZODIAC_GLYPHS = {
-    "Aries": "♈",
-    "Taurus": "♉",
-    "Gemini": "♊",
-    "Cancer": "♋",
-    "Leo": "♌",
-    "Virgo": "♍",
-    "Libra": "♎",
-    "Scorpio": "♏",
-    "Sagittarius": "♐",
-    "Capricorn": "♑",
-    "Aquarius": "♒",
-    "Pisces": "♓"
-  };
 
   // Planet icons mapping
   const PLANET_ICONS = {
@@ -58,23 +47,37 @@ export default function ChartDisplay({ chartData }) {
   const renderZodiacWheel = () => {
     const size = 500;
     const center = size / 2;
-    const zodiacRadius = 80;
-    const planetsRing1 = 130;
-    const planetsRing2 = 170;
-    const planetsRing3 = 210;
+    const centerRadius = 30;
+    const zodiacInner = 70;
+    const zodiacOuter = 95;
+    const house1Inner = 105;
+    const house1Outer = 135;
+    const house2Inner = 145;
+    const house2Outer = 175;
+    const house3Inner = 185;
+    const house3Outer = 215;
 
     return (
       <svg width={size} height={size} className="chart-canvas" viewBox={`0 0 ${size} ${size}`}>
         {/* Center circle */}
-        <circle cx={center} cy={center} r="30" fill="rgba(194, 234, 102, 0.1)" stroke="#c2ea66" strokeWidth="1.5" />
+        <circle cx={center} cy={center} r={centerRadius} fill="rgba(194, 234, 102, 0.1)" stroke="#c2ea66" strokeWidth="1.5" />
         
-        {/* Zodiac ring - innermost */}
-        <circle cx={center} cy={center} r={zodiacRadius} fill="rgba(255, 255, 255, 0.02)" stroke="#c2ea66" strokeWidth="2" />
+        {/* Zodiac ring band */}
+        <circle cx={center} cy={center} r={zodiacInner} fill="none" stroke="#c2ea66" strokeWidth="1" opacity="0.5" />
+        <circle cx={center} cy={center} r={zodiacOuter} fill="none" stroke="#c2ea66" strokeWidth="1" opacity="0.5" />
         
-        {/* Planet rings - outer rings */}
-        <circle cx={center} cy={center} r={planetsRing1} fill="none" stroke="rgba(194, 234, 102, 0.15)" strokeWidth="1" strokeDasharray="5,5" />
-        <circle cx={center} cy={center} r={planetsRing2} fill="none" stroke="rgba(194, 234, 102, 0.15)" strokeWidth="1" strokeDasharray="5,5" />
-        <circle cx={center} cy={center} r={planetsRing3} fill="none" stroke="rgba(194, 234, 102, 0.1)" strokeWidth="1" strokeDasharray="5,5" />
+        {/* House rings - multiple concentric bands like a real birth chart */}
+        {/* Ring 1 */}
+        <circle cx={center} cy={center} r={house1Inner} fill="none" stroke="rgba(194, 234, 102, 0.2)" strokeWidth="0.5" />
+        <circle cx={center} cy={center} r={house1Outer} fill="none" stroke="rgba(194, 234, 102, 0.2)" strokeWidth="0.5" />
+        
+        {/* Ring 2 */}
+        <circle cx={center} cy={center} r={house2Inner} fill="none" stroke="rgba(194, 234, 102, 0.15)" strokeWidth="0.5" />
+        <circle cx={center} cy={center} r={house2Outer} fill="none" stroke="rgba(194, 234, 102, 0.15)" strokeWidth="0.5" />
+        
+        {/* Ring 3 */}
+        <circle cx={center} cy={center} r={house3Inner} fill="none" stroke="rgba(194, 234, 102, 0.1)" strokeWidth="0.5" />
+        <circle cx={center} cy={center} r={house3Outer} fill="none" stroke="rgba(194, 234, 102, 0.1)" strokeWidth="0.5" />
         
         {/* Zodiac signs - 12 segments */}
         {Object.entries(ZODIAC_ICONS).map((entry, index) => {
@@ -87,65 +90,93 @@ export default function ChartDisplay({ chartData }) {
               <line
                 x1={center}
                 y1={center}
-                x2={center + planetsRing3 * Math.cos(angle)}
-                y2={center + planetsRing3 * Math.sin(angle)}
-                stroke="rgba(194, 234, 102, 0.2)"
+                x2={center + house3Outer * Math.cos(angle)}
+                y2={center + house3Outer * Math.sin(angle)}
+                stroke="rgba(194, 234, 102, 0.25)"
                 strokeWidth="1"
               />
-              {/* Zodiac glyph/symbol - far outside */}
-              <text
-                x={center + (planetsRing3 + 55) * Math.cos(angle)}
-                y={center + (planetsRing3 + 55) * Math.sin(angle)}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fontSize="22"
-                fontWeight="bold"
-                fill="#c2ea66"
-                style={{ pointerEvents: "none" }}
+              {/* Zodiac icon from Font Awesome */}
+              <foreignObject 
+                x={center + (house3Outer + 35) * Math.cos(angle) - 12}
+                y={center + (house3Outer + 35) * Math.sin(angle) - 12}
+                width="24"
+                height="24"
               >
-                {ZODIAC_GLYPHS[sign]}
-              </text>
-              <text
-                x={center + (planetsRing3 + 24) * Math.cos(angle)}
-                y={center + (planetsRing3 + 24) * Math.sin(angle)}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fontSize="12"
-                fontWeight="bold"
-                fill="#c2ea66"
-                style={{ pointerEvents: "none" }}
-              >
-                {sign.substring(0, 3)}
-              </text>
+                <i className={icon} style={{ fontSize: "20px", color: "#c2ea66", display: "flex", alignItems: "center", justifyContent: "center" }}></i>
+              </foreignObject>
             </g>
           );
         })}
+        
+        {/* House angles - AC, DSC, IC, MC */}
+        {houses && houses.length > 0 && (() => {
+          const houseLabels = [
+            { label: "AC", index: 0 },  // Ascendant
+            { label: "DSC", index: 6 }, // Descendant  
+            { label: "IC", index: 9 },  // Imum Coeli
+            { label: "MC", index: 2 }   // Midheaven
+          ];
+          
+          return houseLabels.map(({ label, index }) => {
+            if (!houses[index]) return null;
+            const houseAngle = (houses[index] - 90) * (Math.PI / 180);
+            const labelRadius = house3Outer + 50;
+            const lx = center + labelRadius * Math.cos(houseAngle);
+            const ly = center + labelRadius * Math.sin(houseAngle);
+            
+            return (
+              <g key={`house-${label}`}>
+                {/* House angle line */}
+                <line
+                  x1={center}
+                  y1={center}
+                  x2={center + house3Outer * Math.cos(houseAngle)}
+                  y2={center + house3Outer * Math.sin(houseAngle)}
+                  stroke="rgba(194, 234, 102, 0.4)"
+                  strokeWidth="1.5"
+                />
+                {/* House label */}
+                <text
+                  x={lx}
+                  y={ly}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontSize="14"
+                  fontWeight="bold"
+                  fill="#c2ea66"
+                  style={{ pointerEvents: "none" }}
+                >
+                  {label}
+                </text>
+              </g>
+            );
+          });
+        })()}
 
-        {/* Plot planets on outer rings based on longitude */}
-        {Object.entries(chartData)
+        {/* Plot planets on different rings based on longitude */}
+        {Object.entries(chart)
           .filter(([planetName]) => {
             const validPlanets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ascendant"];
-            const zodiacSigns = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"];
-            return validPlanets.includes(planetName) && !zodiacSigns.includes(planetName);
+            return validPlanets.includes(planetName) && chart[planetName] && chart[planetName].longitude !== undefined;
           })
-          .map(([planetName, data], index) => {
+          .map(([planetName, data]) => {
             if (!data || data.longitude === undefined) return null;
             
-            // Calculate angle from longitude
+            // Calculate angle from longitude (0° Aries = 0°, increases counterclockwise)
             const angle = (data.longitude - 90) * (Math.PI / 180);
             
-            // Distribute planets across the three rings
+            // Distribute planets across rings based on their index
             let radius;
-            if (index % 3 === 0) radius = planetsRing1;
-            else if (index % 3 === 1) radius = planetsRing2;
-            else radius = planetsRing3;
+            const mid1 = (house1Inner + house1Outer) / 2;
+            const mid2 = (house2Inner + house2Outer) / 2;
+            const mid3 = (house3Inner + house3Outer) / 2;
+            
+            if (index % 3 === 0) radius = mid1;
+            else if (index % 3 === 1) radius = mid2;
+            else radius = mid3;
             
             const px = center + radius * Math.cos(angle);
             const py = center + radius * Math.sin(angle);
-            
-            // Store planet positions for aspect lines
-            data._x = px;
-            data._y = py;
             
             const icon = PLANET_ICONS[planetName] || "fas fa-circle";
             const color = planetName === "Sun" ? "#FFD700" : planetName === "Moon" ? "#E0E0E0" : "#c2ea66";
@@ -153,11 +184,11 @@ export default function ChartDisplay({ chartData }) {
             return (
               <g key={`planet-${planetName}`}>
                 {/* Planet symbol circle */}
-                <circle cx={px} cy={py} r="10" fill="rgba(194, 234, 102, 0.2)" stroke={color} strokeWidth="2" />
+                <circle cx={px} cy={py} r="9" fill="rgba(194, 234, 102, 0.2)" stroke={color} strokeWidth="2" />
                 
                 {/* Planet icon */}
-                <foreignObject x={px - 6} y={py - 6} width="12" height="12">
-                  <i className={icon} style={{ fontSize: "8px", color: color, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}></i>
+                <foreignObject x={px - 5} y={py - 5} width="10" height="10">
+                  <i className={icon} style={{ fontSize: "7px", color: color, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}></i>
                 </foreignObject>
               </g>
             );
@@ -166,15 +197,18 @@ export default function ChartDisplay({ chartData }) {
         {/* Aspect lines connecting planets */}
         {(() => {
           const validPlanets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ascendant"];
-          const entries = Object.entries(chartData)
-            .filter(([planetName]) => validPlanets.includes(planetName))
+          const entries = Object.entries(chart)
+            .filter(([planetName]) => validPlanets.includes(planetName) && chart[planetName] && chart[planetName].longitude !== undefined)
             .map(([planetName, data], index) => {
               if (!data || data.longitude === undefined) return null;
               const angle = (data.longitude - 90) * (Math.PI / 180);
+              const mid1 = (house1Inner + house1Outer) / 2;
+              const mid2 = (house2Inner + house2Outer) / 2;
+              const mid3 = (house3Inner + house3Outer) / 2;
               let radius;
-              if (index % 3 === 0) radius = planetsRing1;
-              else if (index % 3 === 1) radius = planetsRing2;
-              else radius = planetsRing3;
+              if (index % 3 === 0) radius = mid1;
+              else if (index % 3 === 1) radius = mid2;
+              else radius = mid3;
               const px = center + radius * Math.cos(angle);
               const py = center + radius * Math.sin(angle);
               return { name: planetName, x: px, y: py, longitude: data.longitude };
@@ -182,20 +216,38 @@ export default function ChartDisplay({ chartData }) {
             .filter(p => p);
 
           const lines = [];
+          const aspectOrbs = {
+            0: { orb: 10, color: "rgba(194, 234, 102, 0.5)", width: 1.5, name: "Conjunction" }, // Green
+            60: { orb: 8, color: "rgba(100, 150, 255, 0.5)", width: 1.2, name: "Sextile" }, // Blue
+            90: { orb: 10, color: "rgba(255, 100, 100, 0.5)", width: 1.5, name: "Square" }, // Red
+            120: { orb: 10, color: "rgba(100, 150, 255, 0.5)", width: 1.2, name: "Trine" }, // Blue
+            180: { orb: 10, color: "rgba(255, 150, 0, 0.5)", width: 1.2, name: "Opposition" }, // Orange
+          };
+          
           for (let i = 0; i < entries.length; i++) {
             for (let j = i + 1; j < entries.length; j++) {
-              lines.push(
-                <line
-                  key={`aspect-${entries[i].name}-${entries[j].name}`}
-                  x1={entries[i].x}
-                  y1={entries[i].y}
-                  x2={entries[j].x}
-                  y2={entries[j].y}
-                  stroke="#c2ea66"
-                  strokeWidth="1"
-                  opacity="0.35"
-                />
-              );
+              let diff = Math.abs(entries[i].longitude - entries[j].longitude);
+              if (diff > 180) diff = 360 - diff;
+              
+              // Check if this is a valid aspect
+              for (const [aspectAngle, aspectData] of Object.entries(aspectOrbs)) {
+                const angle = parseInt(aspectAngle);
+                if (Math.abs(diff - angle) < aspectData.orb) {
+                  lines.push(
+                    <line
+                      key={`aspect-${entries[i].name}-${entries[j].name}-${angle}`}
+                      x1={entries[i].x}
+                      y1={entries[i].y}
+                      x2={entries[j].x}
+                      y2={entries[j].y}
+                      stroke={aspectData.color}
+                      strokeWidth={aspectData.width}
+                      opacity="0.8"
+                    />
+                  );
+                  break; // Only one aspect per planet pair
+                }
+              }
             }
           }
           return lines;
@@ -220,7 +272,7 @@ export default function ChartDisplay({ chartData }) {
         {/* Planet details on the right */}
         <div className="planets-list">
           <div className="chart-grid">
-            {Object.entries(chartData).map(([planetName, data]) => {
+            {Object.entries(chart).map(([planetName, data]) => {
               const iconClass = PLANET_ICONS[planetName] || "fas fa-circle";
               
               return (

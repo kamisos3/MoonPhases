@@ -104,7 +104,8 @@ class ChartRequest(BaseModel):
 @app.post("/chart")
 def generate_chart(req: ChartRequest):
     dt = parser.isoparse(req.datetimeISO)
-    dt_utc = dt + timedelta(minutes=req.tzOffsetMinutes)
+    # Convert to UTC by subtracting the timezone offset 
+    dt_utc = dt - timedelta(minutes=req.tzOffsetMinutes)
 
     jd = swe.julday(dt_utc.year, dt_utc.month, dt_utc.day,  # Julian Day continuous day count to compute positions
                     dt_utc.hour + dt_utc.minute/60 + dt_utc.second/3600)   # Gets universal time
@@ -119,9 +120,12 @@ def generate_chart(req: ChartRequest):
         lon = result[0][0] if isinstance(result[0], tuple) else result[0]
         planets[name] = get_zodiac_sign(lon, name)
 
-    # Get Ascendant
+    # Get Ascendant and Houses
     houses, ascmc = swe.houses(jd, req.latitude, req.longitude)
     asc_lon = ascmc[0][0] if isinstance(ascmc[0], tuple) else ascmc[0]
     planets["Ascendant"] = get_zodiac_sign(asc_lon, "Ascendant")
-
-    return {"chart": planets}
+    
+    # Extract house cusps (12 houses)
+    house_cusps = [h[0] if isinstance(h, tuple) else h for h in houses[:12]]
+    
+    return {"chart": planets, "houses": house_cusps}

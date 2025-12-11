@@ -159,7 +159,7 @@ export default function ChartDisplay({ chartData }) {
             const validPlanets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ascendant"];
             return validPlanets.includes(planetName) && chart[planetName] && chart[planetName].longitude !== undefined;
           })
-          .map(([planetName, data]) => {
+          .map(([planetName, data], index) => {
             if (!data || data.longitude === undefined) return null;
             
             // Calculate angle from longitude (0° Aries = 0°, increases counterclockwise)

@@ -116,12 +116,12 @@ def generate_chart(req: ChartRequest):
                       ("Mars", swe.MARS), ("Jupiter", swe.JUPITER),
                       ("Saturn", swe.SATURN), ("Uranus", swe.URANUS),
                       ("Neptune", swe.NEPTUNE), ("Pluto", swe.PLUTO)]:
-        result = swe.calc_ut(jd, idx)
+        result = swe.calc_ut(jd, idx, swe.FLG_SPEED)
         lon = result[0][0] if isinstance(result[0], tuple) else result[0]
         planets[name] = get_zodiac_sign(lon, name)
 
     # Get Ascendant and Houses
-    houses, ascmc = swe.houses(jd, req.latitude, req.longitude)
+    houses, ascmc = swe.houses(jd, req.latitude, req.longitude, b'P')  # 'P' = Placidus house system
     asc_lon = ascmc[0][0] if isinstance(ascmc[0], tuple) else ascmc[0]
     planets["Ascendant"] = get_zodiac_sign(asc_lon, "Ascendant")
     

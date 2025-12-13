@@ -171,9 +171,32 @@ export default function ChartDisplay({ chartData }) {
             const mid2 = (house2Inner + house2Outer) / 2;
             const mid3 = (house3Inner + house3Outer) / 2;
             
-            if (index % 3 === 0) radius = mid1;
-            else if (index % 3 === 1) radius = mid2;
-            else radius = mid3;
+            if (houses && houses.length === 12) {
+              let planetHouse = 1;
+              
+              for (let i = 0; i < 12; i++) {
+                const currentCusp = houses[i];
+                const nextCusp = houses[(i + 1) % 12];
+                let isInHouse = false;
+                
+                if (nextCusp > currentCusp) {
+                  isInHouse = data.longitude >= currentCusp && data.longitude < nextCusp;
+                } else {
+                  isInHouse = data.longitude >= currentCusp || data.longitude < nextCusp;
+                }
+                
+                if (isInHouse) {
+                  planetHouse = i + 1;
+                  break;
+                }
+              }
+              
+              if (planetHouse >= 1 && planetHouse <= 4) radius = mid1;
+              else if (planetHouse >= 5 && planetHouse <= 8) radius = mid2;
+              else radius = mid3;
+            } else {
+              radius = mid1;
+            }
             
             const px = center + radius * Math.cos(angle);
             const py = center + radius * Math.sin(angle);
@@ -206,9 +229,34 @@ export default function ChartDisplay({ chartData }) {
               const mid2 = (house2Inner + house2Outer) / 2;
               const mid3 = (house3Inner + house3Outer) / 2;
               let radius;
-              if (index % 3 === 0) radius = mid1;
-              else if (index % 3 === 1) radius = mid2;
-              else radius = mid3;
+              
+              if (houses && houses.length === 12) {
+                let planetHouse = 1;
+                
+                for (let i = 0; i < 12; i++) {
+                  const currentCusp = houses[i];
+                  const nextCusp = houses[(i + 1) % 12];
+                  let isInHouse = false;
+                  
+                  if (nextCusp > currentCusp) {
+                    isInHouse = data.longitude >= currentCusp && data.longitude < nextCusp;
+                  } else {
+                    isInHouse = data.longitude >= currentCusp || data.longitude < nextCusp;
+                  }
+                  
+                  if (isInHouse) {
+                    planetHouse = i + 1;
+                    break;
+                  }
+                }
+                
+                if (planetHouse >= 1 && planetHouse <= 4) radius = mid1;
+                else if (planetHouse >= 5 && planetHouse <= 8) radius = mid2;
+                else radius = mid3;
+              } else {
+                radius = mid1;
+              }
+              
               const px = center + radius * Math.cos(angle);
               const py = center + radius * Math.sin(angle);
               return { name: planetName, x: px, y: py, longitude: data.longitude };

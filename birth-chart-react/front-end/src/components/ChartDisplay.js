@@ -1,6 +1,14 @@
 import React from "react";
 import "../styles/ChartDisplay.css";
 
+// Convert decimal degrees to degrees/minutes
+function formatDegrees(decimalDegrees) {
+  const degrees = Math.floor(decimalDegrees);
+  const minutesDecimal = (decimalDegrees - degrees) * 60;
+  const minutes = Math.round(minutesDecimal);
+  return `${degrees}°${minutes}'`;
+}
+
 export default function ChartDisplay({ chartData }) {
   if (!chartData) return null;
 
@@ -40,7 +48,9 @@ export default function ChartDisplay({ chartData }) {
     "Uranus": "fas fa-planet",
     "Neptune": "fas fa-water-wave",
     "Pluto": "fas fa-circle",
-    "Ascendant": "fas fa-arrow-up"
+    "Ascendant": "fas fa-arrow-up",
+    "Lilith": "fas fa-fire",
+    "North Node": "fas fa-dragon"
   };
 
   // Create SVG zodiac wheel
@@ -206,12 +216,9 @@ export default function ChartDisplay({ chartData }) {
             
             return (
               <g key={`planet-${planetName}`}>
-                {/* Planet symbol circle */}
-                <circle cx={px} cy={py} r="9" fill="rgba(194, 234, 102, 0.2)" stroke={color} strokeWidth="2" />
-                
                 {/* Planet icon */}
-                <foreignObject x={px - 5} y={py - 5} width="10" height="10">
-                  <i className={icon} style={{ fontSize: "7px", color: color, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}></i>
+                <foreignObject x={px - 10} y={py - 10} width="20" height="20">
+                  <i className={icon} style={{ fontSize: "18px", color: color, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}></i>
                 </foreignObject>
               </g>
             );
@@ -219,7 +226,7 @@ export default function ChartDisplay({ chartData }) {
 
         {/* Aspect lines connecting planets */}
         {(() => {
-          const validPlanets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ascendant"];
+          const validPlanets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Ascendant", "Lilith", "North Node"];
           const entries = Object.entries(chart)
             .filter(([planetName]) => validPlanets.includes(planetName) && chart[planetName] && chart[planetName].longitude !== undefined)
             .map(([planetName, data], index) => {
@@ -333,7 +340,7 @@ export default function ChartDisplay({ chartData }) {
                   <div className="planet-details">
                     <div className="zodiac-info">
                       <p className="zodiac-sign">{data.sign}</p>
-                      <p className="degree">{data.degree}° {data.sign}</p>
+                      <p className="degree">{formatDegrees(data.degree)} {data.sign}</p>
                     </div>
 
                     {data.astrology_details && (

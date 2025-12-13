@@ -65,7 +65,9 @@ PLANET_MEANINGS = {
     "Uranus": {"symbol": "♅", "meaning": "Innovation, revolution, uniqueness"},
     "Neptune": {"symbol": "♆", "meaning": "Dreams, intuition, spirituality, illusion"},
     "Pluto": {"symbol": "♇", "meaning": "Transformation, power, rebirth, hidden forces"},
-    "Ascendant": {"symbol": "AC", "meaning": "How you appear to others, first impression"}
+    "Ascendant": {"symbol": "AC", "meaning": "How you appear to others, first impression"},
+    "Lilith": {"symbol": "⚸", "meaning": "Shadow self, rebellion, sexuality, power"},
+    "North Node": {"symbol": "☊", "meaning": "Soul's destiny, life purpose, growth direction"}
 }
 
 
@@ -119,6 +121,16 @@ def generate_chart(req: ChartRequest):
         result = swe.calc_ut(jd, idx, swe.FLG_SPEED)
         lon = result[0][0] if isinstance(result[0], tuple) else result[0]
         planets[name] = get_zodiac_sign(lon, name)
+
+    # Add Lilith (Mean Black Moon)
+    result = swe.calc_ut(jd, swe.MEAN_APOG, swe.FLG_SPEED)
+    lilith_lon = result[0][0] if isinstance(result[0], tuple) else result[0]
+    planets["Lilith"] = get_zodiac_sign(lilith_lon, "Lilith")
+    
+    # Add North Node (Mean)
+    result = swe.calc_ut(jd, swe.MEAN_NODE, swe.FLG_SPEED)
+    node_lon = result[0][0] if isinstance(result[0], tuple) else result[0]
+    planets["North Node"] = get_zodiac_sign(node_lon, "North Node")
 
     # Get Ascendant and Houses
     houses, ascmc = swe.houses(jd, req.latitude, req.longitude, b'P')  # 'P' = Placidus house system

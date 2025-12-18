@@ -32,16 +32,16 @@ wheels/
 PYTHONPATH
 *.pyc
 
-# React & Frontend
-/birth-chart-react/front-end/node_modules/
-/birth-chart-react/front-end/build/
-/birth-chart-react/front-end/.env.local
-/birth-chart-react/front-end/.env.development.local
-/birth-chart-react/front-end/.env.test.local
-/birth-chart-react/front-end/.env.production.local
-/birth-chart-react/front-end/npm-debug.log*
-/birth-chart-react/front-end/yarn-debug.log*
-/birth-chart-react/front-end/yarn-error.log*
+# React & Frontend - Updated for moon-phases
+node_modules/
+/moon-phases/front-end/build/
+/moon-phases/front-end/.env.local
+/moon-phases/front-end/.env.development.local
+/moon-phases/front-end/.env.test.local
+/moon-phases/front-end/.env.production.local
+/moon-phases/front-end/npm-debug.log*
+/moon-phases/front-end/yarn-debug.log*
+/moon-phases/front-end/yarn-error.log*
 
 # Testing
 /coverage

@@ -1,0 +1,275 @@
+/* Moon Phase Display Styles */
+.moon-phase-display {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.moon-phase-display h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.moon-info-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.moon-phase-card,
+.moon-zodiac-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(194, 234, 102, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moon-phase-card:hover,
+.moon-zodiac-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(194, 234, 102, 0.3);
+}
+
+.moon-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.moon-phase-icon {
+  color: #c2ea66;
+  filter: drop-shadow(0 0 10px rgba(194, 234, 102, 0.5));
+}
+
+.phase-name {
+  color: #c2ea66;
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 0 15px 0;
+}
+
+.phase-description {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.phase-details,
+.zodiac-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.detail-item strong {
+  color: #c2ea66;
+  font-weight: 600;
+}
+
+.planet-icon {
+  font-size: 1.5rem;
+  color: #c2ea66;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.planet-details {
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.detail-item span {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.energy-box {
+  background: rgba(194, 234, 102, 0.15);
+  border: 1px solid rgba(194, 234, 102, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.energy-box h3 {
+  color: #c2ea66;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.energy-box p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.zodiac-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.zodiac-icon {
+  color: #c2ea66;
+  filter: drop-shadow(0 0 10px rgba(194, 234, 102, 0.5));
+}
+
+.moon-zodiac-card h2 {
+  color: #c2ea66;
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 0 15px 0;
+}
+
+.element-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(194, 234, 102, 0.15);
+  color: #c2ea66;
+  border: 1px solid rgba(194, 234, 102, 0.3);
+}
+
+.element-badge.fire,
+.element-badge.earth,
+.element-badge.air,
+.element-badge.water {
+  background: rgba(194, 234, 102, 0.15);
+  color: #c2ea66;
+  border: 1px solid rgba(194, 234, 102, 0.3);
+}
+
+.element-meaning {
+  background: rgba(194, 234, 102, 0.15);
+  border: 1px solid rgba(194, 234, 102, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.element-meaning h3 {
+  color: #c2ea66;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.element-meaning p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  font-style: italic;
+}
+
+.timestamp {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(194, 234, 102, 0.3);
+}
+
+.timestamp small {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.refresh-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto 0;
+  padding: 12px 30px;
+  background: rgba(194, 234, 102, 0.8);
+  border: 2px solid rgba(194, 234, 102, 0.5);
+  border-radius: 25px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.refresh-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 234, 102, 0.4);
+  background: rgba(194, 234, 102, 1);
+}
+
+.refresh-button:active {
+  transform: translateY(0);
+}
+
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  font-size: 1.1rem;
+}
+
+.loading-message {
+  background: rgba(102, 126, 234, 0.2);
+  color: #64b5f6;
+  border: 2px solid rgba(102, 126, 234, 0.4);
+}
+
+.error-message {
+  background: rgba(255, 82, 82, 0.2);
+  color: #ff5252;
+  border: 2px solid rgba(255, 82, 82, 0.4);
+}
+
+@media (max-width: 768px) {
+  .moon-info-container {
+    grid-template-columns: 1fr;
+  }
+
+  .moon-phase-display h1 {
+    font-size: 2rem;
+  }
+
+  .moon-emoji {
+    font-size: 4rem;
+  }
+
+  .phase-name {
+    font-size: 1.5rem;
+  }
+}

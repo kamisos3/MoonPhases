@@ -3,17 +3,12 @@
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
-  overflow: hidden;
+  background: linear-gradient(to bottom, #1a0933 0%, #2d1b4e 25%, #4a2c6f 50%, #663d99 75%, #8b5fc7 100%);
+  background-attachment: fixed;
 }
 
 .galaxy-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .App-header {
@@ -38,13 +33,14 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
   position: relative;
   z-index: 1;
+}
+
+.moon-section {
+  width: 100%;
 }
 
 .form-section {
@@ -103,5 +99,42 @@
   .App-header p {
     font-size: 0.95rem;
   }
+}
+
+.loading-message {
+  text-align: center;
+  color: #c2ea66;
+  font-size: 1.5rem;
+  padding: 40px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.refresh-button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(194, 234, 102, 0.8);
+  border: 2px solid rgba(194, 234, 102, 1);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(194, 234, 102, 0.3);
+}
+
+.refresh-button:hover {
+  background: rgba(194, 234, 102, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 234, 102, 0.5);
+}
+
+.refresh-button:active {
+  transform: translateY(0);
 }
 

@@ -6,6 +6,7 @@ venv/
 env/
 .venv/
 ephe/
+.eslintcache
 
 # Python
 __pycache__/

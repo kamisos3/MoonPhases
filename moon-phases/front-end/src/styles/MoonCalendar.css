@@ -1,0 +1,386 @@
+.calendar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.calendar-modal {
+  background: linear-gradient(to bottom, #1a0933 0%, #2d1b4e 25%, #4a2c6f 50%, #663d99 75%, #8b5fc7 100%);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 15px;
+}
+
+.calendar-header h2 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.calendar-content {
+  color: white;
+}
+
+.month-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.month-navigation h3 {
+  margin: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.weekday-header {
+  text-align: center;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 2px solid rgba(194, 234, 102, 0.4);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  min-height: 70px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+
+.calendar-day.has-day:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(194, 234, 102, 0.3);
+}
+
+.day-number {
+  font-size: 14px;
+  color: white;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.moon-phase-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.calendar-moon-icon {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+}
+
+/* Scrollbar styling */
+.calendar-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.calendar-modal::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.calendar-modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.calendar-modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.day-detail-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(194, 234, 102, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  min-width: 350px;
+  max-width: 450px;
+  animation: slideUp 0.3s ease;
+}
+
+.day-detail-content {
+  color: white;
+}
+
+.detail-section {
+  margin: 20px 0;
+  padding: 0;
+}
+
+.moon-phase-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 20px;
+}
+
+.detail-moon-icon {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  color: #c2ea66;
+  filter: drop-shadow(0 0 10px rgba(194, 234, 102, 0.5));
+}
+
+.detail-phase-name {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #c2ea66;
+  margin-top: 10px;
+}
+
+.detail-date {
+  text-align: center;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.zodiac-section {
+  padding-top: 20px;
+}
+
+.zodiac-sign-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #c2ea66;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(194, 234, 102, 0.5);
+}
+
+.zodiac-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.detail-item strong {
+  color: #c2ea66;
+  font-weight: 600;
+}
+
+.detail-item span {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.element-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(194, 234, 102, 0.15);
+  color: #c2ea66;
+  border: 1px solid rgba(194, 234, 102, 0.3);
+}
+
+.detail-phase-description {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 15px;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+.detail-energy-box {
+  background: rgba(194, 234, 102, 0.15);
+  border: 1px solid rgba(194, 234, 102, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.detail-energy-box h3 {
+  color: #c2ea66;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.detail-energy-box p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.detail-close-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 30px;
+  background: rgba(194, 234, 102, 0.2);
+  border: 1px solid rgba(194, 234, 102, 0.4);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.detail-close-button:hover {
+  background: rgba(194, 234, 102, 0.3);
+  box-shadow: 0 4px 16px rgba(194, 234, 102, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .calendar-modal {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .calendar-header h2 {
+    font-size: 20px;
+  }
+
+  .calendar-grid {
+    gap: 5px;
+  }
+
+  .calendar-day {
+    min-height: 60px;
+  }
+
+  .day-number {
+    font-size: 12px;
+  }
+
+  .weekday-header {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .month-navigation h3 {
+    font-size: 18px;
+  }
+}

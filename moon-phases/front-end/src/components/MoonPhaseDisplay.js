@@ -18,7 +18,7 @@ import { FaWind } from 'react-icons/fa';
 export default function MoonPhaseDisplay({ moonData }) {
   if (!moonData) return null;
 
-  const { moon_zodiac, moon_phase, datetime } = moonData;
+  const { moon_zodiac, moon_phase } = moonData;
 
   // Map moon phases to icons
   const getMoonPhaseIcon = (phaseName) => {
@@ -68,23 +68,8 @@ export default function MoonPhaseDisplay({ moonData }) {
     }
   };
 
-  const formatDate = (isoString) => {
-    const date = new Date(isoString);
-    return date.toLocaleString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZoneName: 'short',
-      timeZone: 'America/Halifax'
-    });
-  };
-
   return (
     <div className="moon-phase-display">
-      
       <div className="moon-info-container">
         {/* Moon Phase Section */}
         <div className="moon-phase-card">
@@ -148,10 +133,6 @@ export default function MoonPhaseDisplay({ moonData }) {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="timestamp">
-        <small>Current Atlantic Time: {formatDate(datetime)}</small>
       </div>
     </div>
   );

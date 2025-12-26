@@ -1,10 +1,12 @@
 """FastAPI connection to React WebApp front-end - Moon Phase Tracker"""
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import swisseph as swe
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import math
+import pytz
 
 app = FastAPI(title="Moon Phase Tracker")
 
@@ -141,14 +143,41 @@ def get_moon_phase(sun_lon, moon_lon):
 
 
 @app.get("/moon-phase")
-def get_current_moon_phase():
-    """Get the current moon phase and zodiac sign"""
+def get_current_moon_phase(
+    latitude: float = Query(None, description="Latitude for timezone calculation"),
+    longitude: float = Query(None, description="Longitude for timezone calculation"),
+    timezone_name: str = Query(None, description="Timezone name (e.g., 'America/Puerto_Rico')")
+):
+    """Get the current moon phase and zodiac sign with proper timezone handling"""
     # Get current UTC time
-    now = datetime.utcnow()
+    utc_now = datetime.now(timezone.utc)
     
-    # Calculate Julian Day
-    jd = swe.julday(now.year, now.month, now.day, 
-                    now.hour + now.minute/60 + now.second/3600)
+    # Determine local time based on provided parameters
+    if timezone_name:
+        try:
+            local_tz = pytz.timezone(timezone_name)
+            local_time = utc_now.astimezone(local_tz)
+        except:
+            local_time = utc_now  # fallback to UTC
+    elif latitude is not None and longitude is not None:
+        # Use geocoding to find timezone
+        try:
+            from timezonefinder import TimezoneFinder
+            tf = TimezoneFinder()
+            timezone_str = tf.timezone_at(lat=latitude, lng=longitude)
+            if timezone_str:
+                local_tz = pytz.timezone(timezone_str)
+                local_time = utc_now.astimezone(local_tz)
+            else:
+                local_time = utc_now
+        except:
+            local_time = utc_now  # fallback to UTC
+    else:
+        local_time = utc_now  # No location provided, use UTC
+    
+    # Calculate Julian Day using UTC for astronomical calculations
+    jd = swe.julday(utc_now.year, utc_now.month, utc_now.day, 
+                    utc_now.hour + utc_now.minute/60 + utc_now.second/3600)
     
     # Get Sun position
     sun_result = swe.calc_ut(jd, swe.SUN, swe.FLG_SPEED)
@@ -165,7 +194,9 @@ def get_current_moon_phase():
     moon_phase = get_moon_phase(sun_lon, moon_lon)
     
     return {
-        "datetime": now.isoformat(),
+        "datetime": local_time.isoformat(),
+        "timezone": str(local_time.tzinfo),
+        "utc_datetime": utc_now.isoformat(),
         "moon_zodiac": moon_zodiac,
         "moon_phase": moon_phase
     }

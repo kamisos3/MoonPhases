@@ -97,7 +97,7 @@ export default function MoonPhaseDisplay({ moonData }) {
         {/* Moon Zodiac Section */}
         <div className="moon-zodiac-card">
           <div className="zodiac-icon-container">{getZodiacIcon(moon_zodiac.sign)}</div>
-          <h2>Moon is in {moon_zodiac.sign}</h2>
+          <h2>Moon in {moon_zodiac.sign}</h2>
           
           <div className="zodiac-details">
             <div className="detail-item">

@@ -7,9 +7,6 @@
   background-attachment: fixed;
 }
 
-.galaxy-background {
-  display: none;
-}
 
 .App-header {
   text-align: center;
@@ -49,17 +46,6 @@
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   height: fit-content;
-  backdrop-filter: blur(3px);
-}
-
-.chart-section {
-  background: rgba(255, 255, 255, 0);
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   backdrop-filter: blur(3px);
 }
 

@@ -35,6 +35,9 @@ cd MoonPhases
 
 For detailed setup instructions, see [SETUP.md](SETUP.md)
 
+▶ **References**
+Transit Moon per Zodiac Sign [https://girlandhermoon.com]
+
 ▶ **Author**
 
 Kami Sostre [https://github.com/kamisos3]

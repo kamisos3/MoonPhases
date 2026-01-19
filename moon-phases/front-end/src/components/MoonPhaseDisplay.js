@@ -20,6 +20,23 @@ export default function MoonPhaseDisplay({ moonData }) {
 
   const { moon_zodiac, moon_phase } = moonData;
 
+  // Zodiac sign information
+  const zodiacInfo = {
+    "Aries": "The Moon in Aries pushes you to move towards what you want with honesty and courage, be careful not to turn it into impulsivity.",
+    "Taurus": ""
+    "Gemini":
+    "Cancer":
+    "Leo":
+    "Virgo":
+    "Libra":
+    "Scorpio":
+    "Sagittarius":
+    "Capricorn":
+    "Aquarius":
+    "Pisces":
+  }
+
+
   // Map moon phases to icons
   const getMoonPhaseIcon = (phaseName) => {
     const iconProps = { size: 120, className: "moon-phase-icon" };

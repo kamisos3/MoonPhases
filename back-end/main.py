@@ -46,7 +46,7 @@ ZODIAC_PROPERTIES = {
 MOON_PHASE_INFO = {
     "New Moon": {
         "emoji": "🌑",
-        "description": "A time for new beginnings and setting intentions. The Moon is hidden from view.",
+        "description": "It's time for new beginnings.",
         "energy": "Planting seeds, fresh starts, introspection"
     },
     "Waxing Crescent": {
